@@ -5,17 +5,16 @@ const callerApi = async (
   setLoading: React.Dispatch<SetStateAction<boolean>>,
   handleTopicAdd: (question: string, response: string) => void
 ) => {
-  const body = '{"contents":[{"parts":[{"text":"question:' + question + '"}]}]}';
-  const request = await fetch(
-    "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=AIzaSyCmkka4CpQ6XHwuRwboY7D8EDYKAPaeXNY",
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: body,
-    }
-  );
+  const API_KEY = import.meta.env.Api_Key;
+  const body =
+    '{"contents":[{"parts":[{"text":"question:' + question + '"}]}]}';
+  const request = await fetch(API_KEY, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: body,
+  });
   const response = await request.json();
 
   if (request.status == 200) {
