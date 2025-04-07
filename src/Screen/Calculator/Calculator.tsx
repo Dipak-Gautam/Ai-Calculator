@@ -6,7 +6,7 @@ const Calculator = () => {
   const [recentData, setRecent] = useState<string[]>([]);
   const [allProblems, setAllProblems] = useState<string[][]>([]);
   const [index, setIndex] = useState<number | undefined>();
-  const firstrender = useRef(true);
+  const firstRender = useRef(true);
 
   const handleAddRecent = (
     expression: string,
@@ -21,11 +21,11 @@ const Calculator = () => {
   };
 
   const getDataLocal = () => {
-    const tempdata = localStorage.getItem("allCalc");
-    if (tempdata == null) {
+    const tempData = localStorage.getItem("allCalc");
+    if (tempData == null) {
       setAllProblems([]);
     } else {
-      const problems = JSON.parse(tempdata);
+      const problems = JSON.parse(tempData);
       setAllProblems(problems);
     }
   };
@@ -33,7 +33,7 @@ const Calculator = () => {
   const firstProblem = useRef(false);
   useEffect(() => {
     if (!firstProblem.current) {
-      setAllProblems((cruuentProblem) => [recentData, ...cruuentProblem]);
+      setAllProblems((currentProblem) => [recentData, ...currentProblem]);
       firstProblem.current = true;
     } else {
       setAllProblems((Problems) => [recentData, ...Problems.slice(1)]);
@@ -45,8 +45,8 @@ const Calculator = () => {
   }, []);
 
   useEffect(() => {
-    if (firstrender.current) {
-      firstrender.current = false;
+    if (firstRender.current) {
+      firstRender.current = false;
       return;
     }
     setLocalData();
